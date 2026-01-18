@@ -20,3 +20,4 @@ Thumbs.db
 
 # Build Files
 /dist
+/generated/prisma
