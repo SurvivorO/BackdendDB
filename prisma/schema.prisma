@@ -5,10 +5,77 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  email String @unique
+  name String
+  password String
+  created DateTime
+  isPremiumUser Boolean
+  jobs Job[]
+  payments Payment[]
+  notifications Notification[]
+}
+
+model Job{
+  id Int @id @default(autoincrement())
+  UserId Int
+  type JobType
+  status JobStatus
+  input Json //input payload {sent by user}
+  created_at DateTime
+  job_result JobResult?
+  user_id User @relation(fields: [UserId], references: [id])
+  
+}
+
+model JobResult {
+  id Int @id @default(autoincrement())
+  result Json
+  completedAt DateTime
+  JobId Int @unique
+  job_id Job @relation(fields: [JobId], references: [id])
+}
+
+model Payment {
+  id Int @id @default(autoincrement())
+  UserID Int
+  amount Int
+  status PaymentStatus
+  razorpayId String
+  created_At DateTime
+  user_id User @relation(fields: [UserID],references: [id])
+}
+
+model Notification {
+  id Int @id @default(autoincrement())
+  UserID Int
+  message String
+  SentAt DateTime
+  user_id User @relation(fields: [UserID],references: [id])
+}
+
+enum JobType {
+  ResumeBuilding
+  CarRental
+  AISummary  
+}
+
+enum JobStatus {
+  Queued
+  Processing
+  Completed
+}
+
+enum PaymentStatus {
+  Successfull
+  Failed
 }
