@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# Prisma
+/prisma/*.db
+/prisma/*.db-journal
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDES
+.vscode/
+.idea/
