@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import prisma from '../../prisma/prisma';
-import { parse } from 'node:path';
 
 
 export const getAllUsers = async (req: Request, res: Response) => {

@@ -1,22 +1,22 @@
 import { NextFunction, Router, Request, Response } from "express";
 import * as userController from '../controllers/userController';
 
-const router = Router();
+const userRouter = Router();
 
 const timeLogger = (req: Request, res: Response, next: NextFunction) => {
     console.log('Time:', new Date().toISOString());
-    console.log('Request URL:', req.originalUrl);
+    console.log('User Request URL:', req.originalUrl);
     next();
 }
 
-router.use(timeLogger);
+userRouter.use(timeLogger);
 
-router.get('/', userController.getAllUsers);
-router.get('/:id', userController.getUserById);
-router.post('/', userController.createUser);
-router.put('/:id', userController.updateUser);
-router.delete('/:id', userController.deleteUser);
+userRouter.get('/', userController.getAllUsers);
+userRouter.get('/:id', userController.getUserById);
+userRouter.post('/', userController.createUser);
+userRouter.put('/:id', userController.updateUser);
+userRouter.delete('/:id', userController.deleteUser);
 
-export default router;
+export default userRouter;
 
 //router from userRoute will route all CRUD requests to appropriate controllers that's it
